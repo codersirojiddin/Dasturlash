@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirojiddin | Dasturlash II</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+
+</head>
+
+<body>
+    <div class="parent">
+
+        <h1>
+            Sirojiddin Yoqubjonov
+        </h1>
+
+        <h2>
+            Dasturlash II
+        </h2>
+
+        <div class="image">
+            <img src="mashq.jpg">
+        </div>
+        <div class="code">
+            <pre>
+                <code class="language-cpp">
+                    #include &lt;iostream&gt;
+                    using namespace std;
+                    class Calculator {
+                        private:
+                            double num1;
+                            double num2;
+                        
+                        public:
+                        //Konstruktor
+                        Calculator(double a, double b){
+                            num1 = a;
+                            num2 = b;
+                        }
+                        
+                        //Yig'indisi
+
+                        double sum() {
+                            return num1 + num2;
+                        }
+
+                        //ko'paytmasi
+                        double mult() {
+                            return num1 * num2;
+                        }
+                    };
+
+                    int main() {
+                        double a, b;
+                        cout<<"1-son: ";
+                        cin>>a;
+                        cout<<"2-son: ";
+                        cin>>b;
+
+                        Calculator calc(a, b);
+                        
+                        cout<<"Yig`indi: "<&lt;calc.sum()<&lt;endl;
+                        cout<<"Ko`paytma: "<&lt;calc.mult()<&lt;endl;
+
+                        return 0;
+                    }
+                </code>
+            </pre>
+        </div>
+
+
+        <div class="img-result">
+            <img src="result.jpg">
+        </div>
+        <div class="izoh"></div>
+
+        
+    </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight/js/11.9.0/highlight.min.js">
+        </script>
+
+</body>
+
+</html>
