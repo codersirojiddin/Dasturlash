@@ -2,89 +2,212 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sirojiddin | Dasturlash II</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sirojiddin | Dasturlash II</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
+  <!-- Highlight.js theme (you can change to github-dark, atom-one-dark, etc.) -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 
 <body>
-    <div class="parent">
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb o1"></span>
+    <span class="orb o2"></span>
+    <span class="orb o3"></span>
+  </div>
 
-        <h1>
-            Sirojiddin Yoqubjonov
-        </h1>
+  <main class="container">
+    <header class="hero">
+      <div class="badge">Dasturlash II • Portfolio</div>
+      <h1 class="title">Sirojiddin Yoqubjonov</h1>
+      <p class="subtitle">
+        C++ misol: Class + Constructor + Methodlar (sum / mult)
+      </p>
+    </header>
 
-        <h2>
-            Dasturlash II
-        </h2>
-
-        <div class="image">
-            <img src="mashq.jpg" alt="Mashq rasmi">
+    <section class="grid">
+      <!-- Left: Task image -->
+      <article class="card media">
+        <div class="card-header">
+          <h3>Mashq rasmi</h3>
+          <span class="muted">Topshiriq</span>
         </div>
-        <div class="code">
-            <pre>
-                <code class="language-cpp">
-                    #include &lt;iostream&gt;
-                    using namespace std;
-                    class Calculator {
-                        private:
-                            double num1;
-                            double num2;
-                        
-                        public:
-                        //Konstruktor
-                        Calculator(double a, double b){
-                            num1 = a;
-                            num2 = b;
-                        }
-                        
-                        //Yig'indisi
+        <div class="media-wrap">
+          <img src="mashq.jpg" alt="Mashq rasmi" loading="lazy" />
+        </div>
+      </article>
 
-                        double sum() {
-                            return num1 + num2;
-                        }
+      <!-- Right: Result image -->
+      <article class="card media">
+        <div class="card-header">
+          <h3>Natija</h3>
+          <span class="muted">Output</span>
+        </div>
+        <div class="media-wrap">
+          <img src="result.jpg" alt="Natija rasmi" loading="lazy" />
+        </div>
+      </article>
 
-                        //ko'paytmasi
-                        double mult() {
-                            return num1 * num2;
-                        }
-                    };
+      <!-- Full width: Code -->
+      <article class="card code-card">
+        <div class="code-topbar">
+          <div class="dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="file-meta">
+            <span class="file-name">main.cpp</span>
+            <span class="chip">C++</span>
+          </div>
 
-                    int main() {
-                        double a, b;
-                        cout<<"1-son: ";
-                        cin>>a;
-                        cout<<"2-son: ";
-                        cin>>b;
+          <div class="actions">
+            <button class="btn ghost" id="toggleLines" type="button" aria-pressed="true" title="Line numbers">
+              Lines
+            </button>
 
-                        Calculator calc(a, b);
-                        
-                        cout<<"Yig`indi: "<&lt;calc.sum()<&lt;endl;
-                        cout<<"Ko`paytma: "<&lt;calc.mult()<&lt;endl;
-
-                        return 0;
-                    }
-                </code>
-            </pre>
+            <button class="btn primary" id="copyBtn" type="button" title="Copy code">
+              <span class="btn-icon" aria-hidden="true">
+                <!-- copy icon -->
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </span>
+              Copy
+            </button>
+          </div>
         </div>
 
+        <div class="code-wrap" id="codeWrap">
+          <pre class="line-numbers" id="pre">
+<code class="language-cpp" id="codeBlock">#include &lt;iostream&gt;
+using namespace std;
 
-        <div class="img-result">
-            <img src="result.jpg" alt="Natija rasmi">
+class Calculator {
+private:
+    double num1;
+    double num2;
+
+public:
+    // Konstruktor
+    Calculator(double a, double b) {
+        num1 = a;
+        num2 = b;
+    }
+
+    // Yig'indisi
+    double sum() {
+        return num1 + num2;
+    }
+
+    // Ko'paytmasi
+    double mult() {
+        return num1 * num2;
+    }
+};
+
+int main() {
+    double a, b;
+
+    cout &lt;&lt; "1-son: ";
+    cin &gt;&gt; a;
+
+    cout &lt;&lt; "2-son: ";
+    cin &gt;&gt; b;
+
+    Calculator calc(a, b);
+
+    cout &lt;&lt; "Yig`indi: " &lt;&lt; calc.sum() &lt;&lt; endl;
+    cout &lt;&lt; "Ko`paytma: " &lt;&lt; calc.mult() &lt;&lt; endl;
+
+    return 0;
+}</code>
+          </pre>
+
+          <div class="toast" id="toast" role="status" aria-live="polite">
+            Copied ✅
+          </div>
         </div>
-        <div class="izoh"></div>
+      </article>
 
-        
-    </div>
+      <article class="card note">
+        <h3>Izoh</h3>
+        <p>
+          Bu misolda foydalanuvchi 2 ta son kiritadi, so‘ng Calculator klassi orqali
+          yig‘indi va ko‘paytma ekranga chiqariladi.
+        </p>
+      </article>
+    </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js">
-        </script>
+    <footer class="footer">
+      <span>© <span id="year"></span> • Sirojiddin</span>
+      <span class="sep">•</span>
+      <span class="muted">Clean UI • Fast • Responsive</span>
+    </footer>
+  </main>
 
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <script>
+    // highlight
+    hljs.highlightAll();
+
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // copy code
+    const copyBtn = document.getElementById("copyBtn");
+    const codeBlock = document.getElementById("codeBlock");
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+      toast.classList.add("show");
+      clearTimeout(window.__t);
+      window.__t = setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      const text = codeBlock.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast();
+        copyBtn.classList.add("copied");
+        setTimeout(() => copyBtn.classList.remove("copied"), 700);
+      } catch (e) {
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast();
+      }
+    });
+
+    // line numbers toggle
+    const toggleLines = document.getElementById("toggleLines");
+    const pre = document.getElementById("pre");
+
+    toggleLines.addEventListener("click", () => {
+      const enabled = pre.classList.toggle("line-numbers");
+      toggleLines.setAttribute("aria-pressed", enabled ? "true" : "false");
+    });
+
+    // generate line numbers (based on code lines)
+    function applyLineNumbers() {
+      const code = codeBlock.textContent.replace(/\n$/, "");
+      const lines = code.split("\n").length;
+      pre.style.setProperty("--lines", lines);
+    }
+    applyLineNumbers();
+  </script>
 </body>
-
 
 </html>
