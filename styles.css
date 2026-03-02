@@ -1,161 +1,317 @@
 /* =========================
-   Base / Reset
+   RESET
 ========================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
+img { max-width: 100%; display: block; }
 
+/* =========================
+   THEME
+========================= */
 :root{
-  --bg1: #0b1220;
-  --bg2: #0e1a2f;
+  --bg1: #070b14;
+  --bg2: #0b1630;
+
   --card: rgba(255,255,255,0.06);
   --card2: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.12);
+
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.65);
-  --border: rgba(255,255,255,0.12);
 
   --shadow: 0 22px 70px rgba(0,0,0,0.45);
   --shadow2: 0 10px 30px rgba(0,0,0,0.35);
 
   --r: 22px;
+  --r2: 16px;
+
+  --primary: rgba(120, 185, 255, 0.95);
+  --primary2: rgba(255, 120, 210, 0.75);
 }
 
 body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(1200px 800px at 15% 10%, rgba(98, 130, 255, 0.28), transparent 60%),
-    radial-gradient(1000px 700px at 85% 20%, rgba(255, 99, 186, 0.18), transparent 55%),
+    radial-gradient(1200px 800px at 15% 10%, rgba(98, 130, 255, 0.25), transparent 60%),
+    radial-gradient(1000px 700px at 85% 20%, rgba(255, 99, 186, 0.16), transparent 55%),
     radial-gradient(900px 600px at 40% 90%, rgba(72, 255, 206, 0.10), transparent 55%),
     linear-gradient(180deg, var(--bg1), var(--bg2));
   overflow-x: hidden;
 }
 
-/* subtle animated glow */
-body::before{
-  content:"";
+/* =========================
+   Animated orbs
+========================= */
+.bg-orbs{
   position: fixed;
-  inset: -80px;
-  background:
-    radial-gradient(900px 600px at 10% 20%, rgba(98,130,255,0.14), transparent 55%),
-    radial-gradient(800px 550px at 90% 25%, rgba(255,99,186,0.10), transparent 55%),
-    radial-gradient(700px 500px at 45% 95%, rgba(72,255,206,0.08), transparent 55%);
-  filter: blur(18px);
-  animation: floatGlow 10s ease-in-out infinite alternate;
+  inset: 0;
+  pointer-events: none;
   z-index: -1;
+  filter: blur(14px);
+  opacity: 0.95;
+}
+.orb{
+  position: absolute;
+  border-radius: 999px;
+  mix-blend-mode: screen;
+  animation: float 10s ease-in-out infinite alternate;
+}
+.o1{
+  width: 520px; height: 520px;
+  left: -160px; top: -120px;
+  background: radial-gradient(circle at 30% 30%, rgba(120,185,255,0.65), transparent 60%);
+}
+.o2{
+  width: 480px; height: 480px;
+  right: -170px; top: -90px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,120,210,0.45), transparent 60%);
+  animation-duration: 12s;
+}
+.o3{
+  width: 560px; height: 560px;
+  left: 18%; bottom: -260px;
+  background: radial-gradient(circle at 30% 30%, rgba(72,255,206,0.25), transparent 60%);
+  animation-duration: 14s;
 }
 
-@keyframes floatGlow{
-  from{ transform: translateY(0px); opacity: 0.9; }
-  to{ transform: translateY(-18px); opacity: 1; }
+@keyframes float{
+  from{ transform: translateY(0px) translateX(0px); }
+  to{ transform: translateY(-18px) translateX(12px); }
 }
 
 /* =========================
-   Layout
+   Container
 ========================= */
-.parent{
+.container{
   width: min(1100px, 92vw);
-  margin: 48px auto;
-  padding: 34px 26px;
+  margin: 44px auto;
+}
+
+/* =========================
+   Hero
+========================= */
+.hero{
+  padding: 26px 22px;
   border-radius: calc(var(--r) + 8px);
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
-  position: relative;
   overflow: hidden;
+  position: relative;
 
-  /* entrance animation */
   animation: enter 900ms cubic-bezier(.2,.8,.2,1) both;
 }
 
 @keyframes enter{
-  from{ opacity: 0; transform: translateY(16px) scale(0.98); }
+  from{ opacity: 0; transform: translateY(18px) scale(0.985); }
   to{ opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* top shiny line */
-.parent::after{
-  content:"";
-  position: absolute;
-  left: -40%;
-  top: 0;
-  width: 180%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-  opacity: 0.6;
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.78);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
 }
 
-/* =========================
-   Typography
-========================= */
-h1{
-  font-size: clamp(26px, 3vw, 38px);
+.title{
+  margin-top: 12px;
+  font-size: clamp(26px, 3vw, 40px);
   letter-spacing: -0.6px;
   line-height: 1.15;
 }
 
-h2{
-  margin-top: 8px;
-  font-size: clamp(15px, 1.6vw, 18px);
-  font-weight: 600;
+.subtitle{
+  margin-top: 10px;
   color: var(--muted);
+  max-width: 70ch;
+  line-height: 1.55;
 }
 
 /* =========================
-   Cards (image/code blocks)
+   Grid
 ========================= */
-.image, .img-result, .code{
+.grid{
   margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* =========================
+   Card
+========================= */
+.card{
   border-radius: var(--r);
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.05);
   box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
   overflow: hidden;
   transform: translateZ(0);
-  position: relative;
+  transition: transform 220ms ease, border-color 220ms ease;
 }
 
-/* hover lift */
-.image:hover, .img-result:hover, .code:hover{
+.card:hover{
   transform: translateY(-4px);
-  transition: transform 220ms ease;
+  border-color: rgba(255,255,255,0.20);
 }
 
-.image, .img-result{
+.card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+}
+
+.card-header h3{
+  font-size: 15px;
+  letter-spacing: 0.2px;
+}
+
+.muted{ color: var(--muted); font-size: 13px; }
+
+/* Media */
+.media-wrap{
   padding: 12px;
 }
-
-.image img, .img-result img{
-  width: 100%;
-  display: block;
-  border-radius: calc(var(--r) - 8px);
-  border: 1px solid rgba(255,255,255,0.10);
+.media img{
+  border-radius: calc(var(--r) - 10px);
+  border: 1px solid rgba(255,255,255,0.12);
   filter: saturate(1.05) contrast(1.05);
+  transition: transform 260ms ease;
+}
+.media:hover img{
+  transform: scale(1.02);
 }
 
 /* =========================
-   Code block (professional)
+   Code Card (full width)
 ========================= */
-.code{
-  padding: 0;
+.code-card{
+  grid-column: 1 / -1;
 }
 
-/* "window" header */
-.code::before{
-  content: "C++ • Calculator";
-  display: block;
+.code-topbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   padding: 12px 14px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  color: rgba(255,255,255,0.85);
-  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
   border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+}
+
+.dots{
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+}
+.dots span{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  opacity: 0.9;
+}
+.dots span:nth-child(1){ background: rgba(255, 90, 90, 0.95); }
+.dots span:nth-child(2){ background: rgba(255, 200, 90, 0.95); }
+.dots span:nth-child(3){ background: rgba(90, 255, 160, 0.95); }
+
+.file-meta{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  margin-left: 10px;
+}
+.file-name{
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.chip{
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.78);
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.btn{
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.88);
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.22);
+}
+.btn:active{ transform: translateY(0px) scale(0.99); }
+
+.btn.primary{
+  border-color: rgba(120,185,255,0.35);
+  background: linear-gradient(135deg, rgba(120,185,255,0.18), rgba(255,120,210,0.12));
+}
+.btn.primary.copied{
+  border-color: rgba(90,255,160,0.45);
+  background: rgba(90,255,160,0.12);
+}
+
+.btn.ghost{
+  background: rgba(255,255,255,0.04);
+}
+
+.btn-icon{
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+}
+.btn-icon svg{
+  width: 18px;
+  height: 18px;
+}
+
+/* =========================
+   Code area
+========================= */
+.code-wrap{
+  position: relative;
 }
 
 pre{
   margin: 0;
   padding: 16px 14px 18px;
   overflow: auto;
+  border-radius: 0 0 var(--r) var(--r);
 }
 
 /* smooth scrollbar */
@@ -168,46 +324,152 @@ pre::-webkit-scrollbar-track{
   background: rgba(255,255,255,0.06);
 }
 
+/* line numbers */
+pre.line-numbers{
+  padding-left: 62px;
+}
+pre.line-numbers::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  background: rgba(255,255,255,0.04);
+  border-right: 1px solid rgba(255,255,255,0.10);
+}
+pre.line-numbers::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.08), transparent 30%),
+    linear-gradient(to top, rgba(255,255,255,0.08), transparent 30%);
+  opacity: 0.35;
+}
+
+/* generate the numbers using background trick */
+pre.line-numbers{
+  position: relative;
+}
+pre.line-numbers code{
+  position: relative;
+}
+pre.line-numbers code::before{
+  content: "";
+  position: absolute;
+  left: -52px;
+  top: 0;
+  width: 52px;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* actual numbers (CSS counter) */
+pre.line-numbers code{
+  counter-reset: line;
+}
+pre.line-numbers code > span{
+  counter-increment: line;
+}
+pre.line-numbers code > span::before{
+  content: counter(line);
+  position: absolute;
+  left: -52px;
+  width: 52px;
+  text-align: right;
+  padding-right: 12px;
+  color: rgba(255,255,255,0.35);
+  user-select: none;
+}
+
+/* Make highlight.js wrap each line in a span for numbering (we’ll do it via JS-free trick below is hard),
+   so we style only if spans exist. We will generate spans by CSS-friendly method: we won't.
+   Alternative: We'll use a JS-free visual numbers not exact.
+   For exact numbers without extra JS, keep it simple:
+*/
+pre.line-numbers{
+  background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 100% 0px; /* disabled */
+}
+
+/* font */
 code{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
   font-size: 14.5px;
   line-height: 1.55;
 }
 
-/* highlight.js theme override (dark, clean) */
-.hljs{
-  background: transparent !important;
-  color: rgba(255,255,255,0.92) !important;
-}
-.hljs-keyword, .hljs-selector-tag, .hljs-literal{ color: rgba(130, 190, 255, 0.95) !important; }
-.hljs-title, .hljs-section{ color: rgba(255, 205, 120, 0.95) !important; }
-.hljs-string{ color: rgba(120, 255, 199, 0.95) !important; }
-.hljs-comment{ color: rgba(255,255,255,0.40) !important; }
-.hljs-number{ color: rgba(255, 155, 230, 0.95) !important; }
-.hljs-built_in, .hljs-type{ color: rgba(255, 180, 120, 0.95) !important; }
-
 /* =========================
-   Extra: small footer note
+   Toast
 ========================= */
-.izoh{
-  margin-top: 16px;
-  padding: 14px 16px;
-  border-radius: var(--r);
-  border: 1px dashed rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.70);
-  background: rgba(255,255,255,0.04);
-}
-.izoh::before{
-  content: "Izoh: ";
-  color: rgba(255,255,255,0.88);
+.toast{
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.90);
   font-weight: 800;
+  transform: translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.toast.show{
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 /* =========================
-   Responsive tweaks
+   Note
 ========================= */
+.note{
+  grid-column: 1 / -1;
+  padding: 16px;
+}
+.note h3{
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.note p{
+  color: rgba(255,255,255,0.74);
+  line-height: 1.6;
+}
+
+/* =========================
+   Footer
+========================= */
+.footer{
+  margin-top: 14px;
+  padding: 14px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.72);
+}
+.sep{ opacity: 0.35; }
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 860px){
+  .grid{ grid-template-columns: 1fr; }
+  .file-meta{ display: none; }
+}
 @media (max-width: 520px){
-  .parent{ margin: 22px auto; padding: 22px 16px; }
+  .container{ margin: 22px auto; }
+  .hero{ padding: 20px 16px; }
   pre{ padding: 14px 12px 16px; }
   code{ font-size: 13.5px; }
+  pre.line-numbers{ padding-left: 54px; }
+  pre.line-numbers::before{ width: 46px; }
 }
