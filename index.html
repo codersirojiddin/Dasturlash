@@ -207,6 +207,30 @@ int main() {
       pre.style.setProperty("--lines", lines);
     }
     applyLineNumbers();
+
+
+    // Image fullscreen logic
+const viewer = document.getElementById("imageViewer");
+const viewerImg = document.getElementById("viewerImg");
+
+document.querySelectorAll(".media img").forEach(img => {
+  img.addEventListener("click", () => {
+    viewer.classList.add("active");
+    viewerImg.src = img.src;
+  });
+});
+
+// Close on click
+viewer.addEventListener("click", () => {
+  viewer.classList.remove("active");
+});
+
+// Close on ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    viewer.classList.remove("active");
+  }
+});
   </script>
 
 
@@ -217,4 +241,5 @@ int main() {
 </body>
 
 </html>
+
 
